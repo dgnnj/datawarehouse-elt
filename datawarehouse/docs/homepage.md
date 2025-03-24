@@ -8,36 +8,6 @@ Este projeto utiliza DBT (Data Build Tool) para gerenciar e transformar dados de
 
 ## Estrutura do Projeto
 
-```mermaid
-graph TD
-    A[Início] --> B[Extrair Dados das Commodities]
-    B --> C[Transformar Dados das Commodities]
-    C --> D[Carregar Dados no PostgreSQL]
-    D --> E[Fim]
-
-    subgraph Extrair
-        B1[Buscar Dados de Cada Commodity]
-        B2[Adicionar Dados na Lista]
-    end
-
-    subgraph Transformar
-        C1[Concatenar Todos os Dados]
-        C2[Preparar DataFrame]
-    end
-
-    subgraph Carregar
-        D1[Salvar DataFrame no PostgreSQL]
-    end
-
-    B --> B1
-    B1 --> B2
-    B2 --> C
-    C --> C1
-    C1 --> C2
-    C2 --> D
-    D --> D1
-```
-
 ### 1. Seeds
 
 Os seeds são dados estáticos que são carregados no Data Warehouse a partir de arquivos CSV. Neste projeto, usamos seeds para carregar dados de movimentações de commodities.
@@ -107,18 +77,20 @@ Os snapshots são utilizados para manter um histórico de como os dados mudam ao
 
    Exemplo de `profiles.yml`:
    ```yaml
-   datawarehouse:
-   outputs:
-    dev:
-      dbname: "{{ env_var('DB_NAME_PROD') }}"
-      host: "{{ env_var('DB_HOST_PROD') }}"
-      pass: "{{ env_var('DB_PASS_PROD') }}"
-      port: "{{ env_var('DB_PORT_PROD') | int }}"
-      schema: "{{ env_var('DB_SCHEMA_PROD') }}"
-      threads: "{{ env_var('DB_THREADS_PROD') | int }}"
-      type: postgres
-      user: "{{ env_var('DB_USER_PROD') }}"
-      target: dev
+   {% raw %}
+    datawarehouse:
+        outputs:
+            dev:
+            dbname: "{{ env_var('DB_NAME_PROD') }}"
+            host: "{{ env_var('DB_HOST_PROD') }}"
+            pass: "{{ env_var('DB_PASS_PROD') }}"
+            port: "{{ env_var('DB_PORT_PROD') | int }}"
+            schema: "{{ env_var('DB_SCHEMA_PROD') }}"
+            threads: "{{ env_var('DB_THREADS_PROD') | int }}"
+            type: postgres
+            user: "{{ env_var('DB_USER_PROD') }}"
+        target: dev
+   {% endraw %}
    ```
 
 4. **Executar os Seeds do DBT**:
