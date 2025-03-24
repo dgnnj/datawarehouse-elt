@@ -37,8 +37,6 @@ models:
     # Configurações por SUBDIRETÓRIO
     staging:
       +materialized: view
-      +schema: public_staging
     
     datamart:
       +materialized: table
-      +schema: public_datamart
