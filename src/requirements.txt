@@ -1,0 +1,5 @@
+pandas #trabalhar com dados
+sqlalchemy #mexer com sql
+python-dotenv #controle de acesso
+psycopg2-binary #driver para mexer com postgre
+yfinance #dados do yahoo
