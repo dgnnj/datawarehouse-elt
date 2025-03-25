@@ -103,7 +103,6 @@ Os snapshots são utilizados para manter um histórico de como os dados mudam ao
 
    Exemplo de `profiles.yml`:
    ```yaml
-   {% raw %}
     datawarehouse:
         outputs:
             dev:
@@ -116,7 +115,6 @@ Os snapshots são utilizados para manter um histórico de como os dados mudam ao
             type: postgres
             user: "{{ env_var('DB_USER_PROD') }}"
         target: dev
-   {% endraw %}
    ```
 
 4. **Executar os Seeds do DBT**:
